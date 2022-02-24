@@ -1,0 +1,7 @@
+include LICENSE
+global-exclude *.pyc
+global-exclude .ipynb_checkpoints
+graft seeq/addons/udf_ui/deployment_notebook
+graft seeq/addons/udf_ui/ui_components/templates
+graft _static
+prune tests
