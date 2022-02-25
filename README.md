@@ -4,7 +4,7 @@
 User-Defined Formula Function User Interface (UDF UI) is a Seeq Add-On that allows users to manage UDFs. This includes creating new UDFs, 
 modifying existing ones, modifying access control, or deleting existing user defined functions and packages. 
 
-![drawing](./docs_src/source/_static/overview.png)
+![drawing](https://github.com/seeq12/seeq-udf-ui/blob/main/docs/_static/overview.png?raw=true)
 
 ----
 # Installation
