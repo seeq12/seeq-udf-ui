@@ -21,7 +21,7 @@ def _get_user(user_name):
 
 
 def push_udf(package_name, selected_function_name, params_and_types, formula, examples_and_descriptions,
-             func_description, users_and_groups_list, func_id, is_new):
+             func_description, package_description, users_and_groups_list, func_id, is_new):
     message_content = ''
 
     formulas_api = sdk.FormulasApi(spy.client)
@@ -88,9 +88,11 @@ def push_udf(package_name, selected_function_name, params_and_types, formula, ex
 
     func_doc_input = sdk.FormulaDocInputV1(description=func_description,
                                            examples=example_list_input)
+    package_doc_input = sdk.FormulaDocInputV1(description=package_description)
 
     try:
         formulas_api.put_formula_doc(package_name=package_name, doc_name=selected_function_name, body=func_doc_input)
+        formulas_api.put_formula_doc(package_name=package_name, doc_name='index', body=package_doc_input)
     except ApiException as e:
         message_content = message_content + '\n' + f'An error was encountered when creating formula documentation. ' \
                                    f'The Seeq API returned:\n{e.body}'

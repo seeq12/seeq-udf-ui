@@ -39,6 +39,10 @@ class UDFPackage:
             [backend.give_current_user_access()]
         return permissions
 
+    @property
+    def description(self):
+        return backend.fetch_udf_docs(package_name=self.name, func_name='index').description
+
 
 class UDFFunction:
     def __init__(self, **entries):

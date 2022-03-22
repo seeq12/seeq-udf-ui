@@ -205,6 +205,7 @@ class BackEnd:
         self.summary_update_published_event.on_next(self.push_request_summary)
 
     def update_doc_on_request(self, doc):
+        self.push_request_summary['package_description'] = doc['package_description']
         self.push_request_summary['function_description'] = doc['function_description']
         self.push_request_summary['examples_and_descriptions'] = doc['examples_and_descriptions']
 
@@ -228,6 +229,7 @@ class BackEnd:
                                    examples_and_descriptions=
                                    self.push_request_summary['examples_and_descriptions'],
                                    func_description=self.push_request_summary['function_description'],
+                                   package_description=self.push_request_summary['package_description'],
                                    users_and_groups_list=self.push_request_summary['users_dict'],
                                    func_id=func_id, is_new=self.selected_function.func_is_new)
 

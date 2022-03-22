@@ -23,7 +23,7 @@ def instantiate_ui_create_function_and_package():
         ui.app.function_parameters_display.params_and_types = [{'name': 'a', 'type': 'Signal'},
                                                                {'name': 'b', 'type': 'Signal'}]
         ui.app.function_parameters_display.formula = '$a + $b'
-        ui.app.function_documentation.description = '<p>Test function</p>'
+        ui.app.function_documentation.func_description = '<p>Test function</p>'
 
         ui.app.access_management.selected_users_dict = [{'name': spy.user.name,
                                                          'username': spy.user.username,

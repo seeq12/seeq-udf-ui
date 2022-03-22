@@ -18,16 +18,17 @@ class FunctionDocumentation(v.VuetifyTemplate):
     description_visible = traitlets.Bool(default_value=False).tag(sync=True)
     examples_visible = traitlets.Bool(default_value=False).tag(sync=True)
     function_updated = traitlets.Bool(default_value=False).tag(sync=True)
-    description = traitlets.Unicode(allow_none=True, default_value='').tag(sync=True)
     examples_and_descriptions = traitlets.List(default_value=[]).tag(sync=True)
     add_example_active = traitlets.Bool(default_value=True).tag(sync=True)
     example_added = traitlets.Bool(default_value=False).tag(sync=True)
     examples_editor_open = traitlets.Bool(default_value=False).tag(sync=True)
     access_management_open = traitlets.Bool(default_value=False).tag(sync=True)
-    description_markdown = traitlets.Unicode(allow_none=True, default_value='').tag(sync=True)
-    markdown_input = traitlets.Unicode(allow_none=True, default_value='# Hello World').tag(sync=True)
-    compiled_markdown = traitlets.Unicode(allow_none=True, default_value='').tag(sync=True)
-    description_toggle = traitlets.Integer(default_value=0, allow_none=True).tag(sync=True)
+    func_description_html = traitlets.Unicode(allow_none=True, default_value='').tag(sync=True)
+    package_description_html = traitlets.Unicode(allow_none=True, default_value='').tag(sync=True)
+    func_description_markdown = traitlets.Unicode(allow_none=True, default_value='').tag(sync=True)
+    package_description_markdown = traitlets.Unicode(allow_none=True, default_value='').tag(sync=True)
+    func_description_toggle = traitlets.Integer(default_value=0, allow_none=True).tag(sync=True)
+    package_description_toggle = traitlets.Integer(default_value=0, allow_none=True).tag(sync=True)
 
     def __init__(self, *args, update_doc_on_request: Callable[[None], list] = None,
                  **kwargs):
@@ -54,23 +55,38 @@ class FunctionDocumentation(v.VuetifyTemplate):
         self.examples_and_descriptions = temp_list
 
     @debounce_with_timer(wait_time=0.3)
-    def vue_update_html(self, data):
-        self.description = markdown_to_html(self.description_markdown)
+    def vue_update_func_desc_html(self, data):
+        self.func_description_html = markdown_to_html(self.func_description_markdown)
 
     @debounce_with_timer(wait_time=0.3)
-    def vue_update_markdown(self, data):
-        self.description_markdown = html_to_markdown(self.description)
+    def vue_update_package_desc_html(self, data):
+        self.package_description_html = markdown_to_html(self.package_description_markdown)
+
+    @debounce_with_timer(wait_time=0.3)
+    def vue_update_func_desc_markdown(self, data):
+        self.func_description_markdown = html_to_markdown(self.func_description_html)
+
+    @debounce_with_timer(wait_time=0.3)
+    def vue_update_package_desc_markdown(self, data):
+        self.package_description_markdown = html_to_markdown(self.package_description_html)
 
     def on_function_change(self, function_and_switches):
         self.function_updated = function_and_switches['function'].function_updated
         self.examples_and_descriptions = function_and_switches['function'].examples_and_descriptions
         self.description_visible = function_and_switches['display_switches'].description_visible
         self.examples_visible = function_and_switches['display_switches'].examples_visible
+
         if not function_and_switches['function'].func_is_new:
-            self.description = function_and_switches['function'].description
-            self.description_markdown = html_to_markdown(self.description)
+            self.func_description_html = function_and_switches['function'].description
+            self.func_description_markdown = html_to_markdown(self.func_description_html)
+
+    def on_package_change(self, package_and_functions):
+        if package_and_functions['package'].description:
+            self.package_description_html = package_and_functions['package'].description
+            self.package_description_markdown = html_to_markdown(self.package_description_html)
 
     def on_update_request(self, update_requested):
         if update_requested:
-            self.update_doc_on_request({'function_description': self.description,
+            self.update_doc_on_request({'package_description': self.package_description_html,
+                                        'function_description': self.func_description_html,
                                         'examples_and_descriptions': self.examples_and_descriptions})
