@@ -86,8 +86,7 @@ $ jupyter notebook
 ```
 
 Documentation can be updated by editing the source files in docs/src/source, and then using the provided bat file to
-
-generate the documentation in the docs folder, i.e.:
+generate the documentation in the docs folder, i.e., from the docs/src folder:
 
 ```sh
 

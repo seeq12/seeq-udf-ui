@@ -41,7 +41,10 @@ class UDFPackage:
 
     @property
     def description(self):
-        return backend.fetch_udf_docs(package_name=self.name, func_name='index').description
+        if not self.is_new_package:
+            return backend.fetch_udf_docs(package_name=self.name, func_name='index').description
+        else:
+            return ''
 
 
 class UDFFunction:
