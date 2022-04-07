@@ -19,7 +19,7 @@ class TestCreate:
                                                                {'name': 'b', 'type': 'Signal'},
                                                                {'name': 'c', 'type': 'Scalar'}]
         ui.app.function_parameters_display.formula = '$a + $b * $c'
-        ui.app.function_documentation.description = '<p>Test function with the same name</p>'
+        ui.app.function_documentation.func_description = '<p>Test function with the same name</p>'
         ui.app.function_documentation.examples_and_descriptions = [
             {'description': 'Example 1', 'formula': '$a + $b * $c'},
             {'description': 'Example 2', 'formula': '$c + $d * $e'}]
@@ -49,16 +49,16 @@ class TestModify:
         assert '$newParam' in ui.app.function_parameters_display.formula
         assert '$newParam' in ui.backend.selected_function.formula
 
-    def test_description(self, instantiate_ui_create_function_and_package):
+    def test_func_description(self, instantiate_ui_create_function_and_package):
         ui = instantiate_ui_create_function_and_package('testPackage', 'testFunction')
 
-        ui.app.function_documentation.description_markdown = '## Test Description'
-        ui.app.function_documentation.vue_update_html(data='')
+        ui.app.function_documentation.func_description_markdown = '## Test Function Description'
+        ui.app.function_documentation.vue_update_func_desc_html(data='')
 
         # The markdown-to-html converter has a delay
         time.sleep(0.5)
 
-        assert '<h2>Test Description</h2>' in ui.app.function_documentation.description
+        assert '<h2>Test Function Description</h2>' in ui.app.function_documentation.func_description_html
 
         ui.app.summary_page.vue_on_review(data='')
         ui.app.summary_page.vue_on_submit(data='')
@@ -66,7 +66,26 @@ class TestModify:
         ui.app.search_display.vue_update_package_object(data='testPackage')
         ui.app.search_display.vue_update_function(data='testFunction($Signal, $Signal)')
 
-        assert '<h2>Test Description</h2>' in ui.backend.selected_function.description
+        assert '<h2>Test Function Description</h2>' in ui.backend.selected_function.description
+
+    def test_package_description(self, instantiate_ui_create_function_and_package):
+        ui = instantiate_ui_create_function_and_package('testPackage', 'testFunction')
+
+        ui.app.function_documentation.package_description_markdown = '## Test Package Description'
+        ui.app.function_documentation.vue_update_package_desc_html(data='')
+
+        # The markdown-to-html converter has a delay
+        time.sleep(0.5)
+
+        assert '<h2>Test Package Description</h2>' in ui.app.function_documentation.package_description_html
+
+        ui.app.summary_page.vue_on_review(data='')
+        ui.app.summary_page.vue_on_submit(data='')
+
+        ui.app.search_display.vue_update_package_object(data='testPackage')
+        ui.app.search_display.vue_update_function(data='testFunction($Signal, $Signal)')
+
+        assert '<h2>Test Package Description</h2>' in ui.backend.selected_package.description
 
     def test_add_examples(self, instantiate_ui_create_function_and_package):
         ui = instantiate_ui_create_function_and_package('testPackage', 'testFunction')
@@ -90,7 +109,7 @@ class TestModify:
         ui.app.function_parameters_display.params_and_types = [{'name': 'a', 'type': 'Signal'},
                                                                {'name': 'b', 'type': 'Signal'}]
         ui.app.function_parameters_display.formula = '$a + $b'
-        ui.app.function_documentation.description = '<p>Test function</p>'
+        ui.app.function_documentation.func_description = '<p>Test function</p>'
 
         access_input = [{'name': spy.user.name,
                          'username': spy.user.username,

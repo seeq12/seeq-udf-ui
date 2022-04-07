@@ -34,7 +34,7 @@ class UserDefinedFunctionsUI:
                              archive_object=self.backend.archive_object)
 
         self.backend.package_change_event.subscribe(self.app.search_display.on_package_change)
-        self.backend.package_change_event.subscribe(self.app.summary_page.on_package_change)
+        self.backend.package_change_event.subscribe(self.app.function_documentation.on_package_change)
         self.backend.package_change_event.subscribe(self.app.access_management.on_package_change)
         self.backend.package_change_event.subscribe(self.app.summary_page.on_package_change)
 

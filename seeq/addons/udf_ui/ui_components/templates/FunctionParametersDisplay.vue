@@ -131,7 +131,7 @@
         :value="formula"
         v-model="formula"
         clear-icon="mdi-close-circle"
-        height="300"
+        height="490"
         dense
         style="font-size: 15px;"
         no-resize="true"
