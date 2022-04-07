@@ -47,7 +47,8 @@
                           <div><strong style="font-family: Arial; color: dimgrey">Function:</strong> {{ selected_function }}</div>
                           <div><strong style="font-family: Arial; color: dimgrey">Parameters:</strong> {{ params_and_types }}</div>
                           <div><strong style="font-family: Arial; color: dimgrey">Formula:</strong> {{ formula }}</div>
-                          <div><strong style="font-family: Arial; color: dimgrey">Function Description:</strong> {{ description }}</div>
+                          <div><strong style="font-family: Arial; color: dimgrey">Function Description:</strong> {{ func_description }}</div>
+                          <div><strong style="font-family: Arial; color: dimgrey">Package Description:</strong> {{ package_description }}</div>
                           <div><strong style="font-family: Arial; color: dimgrey">Examples:</strong> {{ examples_and_descriptions }}</div>
                           <div><strong style="font-family: Arial; color: dimgrey">Access Control:</strong> {{ selected_users_dict }}</div>
                         </v-expansion-panel-content>

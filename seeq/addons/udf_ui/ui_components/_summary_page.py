@@ -20,7 +20,8 @@ class SummaryPage(v.VuetifyTemplate):
     selected_function = traitlets.Unicode(allow_none=True, default_value='').tag(sync=True)
     params_and_types = traitlets.List(default_value=[]).tag(sync=True)
     formula = traitlets.Unicode(allow_none=True, default_value='').tag(sync=True)
-    description = traitlets.Unicode(allow_none=True, default_value='').tag(sync=True)
+    func_description = traitlets.Unicode(allow_none=True, default_value='').tag(sync=True)
+    package_description = traitlets.Unicode(allow_none=True, default_value='').tag(sync=True)
     examples_and_descriptions = traitlets.List(default_value=[]).tag(sync=True)
     selected_users_dict = traitlets.List(allow_none=True, default_value=[]).tag(sync=True)
     package_is_new = traitlets.Bool(default_value=False).tag(sync=False)
@@ -77,14 +78,16 @@ class SummaryPage(v.VuetifyTemplate):
         self.selected_function = ''
         self.params_and_types = []
         self.formula = ''
-        self.description = ''
+        self.func_description = ''
+        self.package_description = ''
         self.examples_and_descriptions = []
         self.selected_users_dict = []
         self.func_is_new = summary['function'].func_is_new
         self.selected_function = summary['function'].name
         self.params_and_types = summary['params_and_types']
         self.formula = summary['formula']
-        self.description = summary['function_description']
+        self.func_description = summary['function_description']
+        self.package_description = summary['package_description']
         self.examples_and_descriptions = summary['examples_and_descriptions']
         self.selected_users_dict = summary['users_dict']
 

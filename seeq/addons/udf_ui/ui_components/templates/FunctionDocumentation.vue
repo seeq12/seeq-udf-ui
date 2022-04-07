@@ -8,51 +8,124 @@
     </v-card-title>
 
     <v-subheader style="height: fit-content; padding-bottom: 15px; font-size: 12px">
-      Enter markdown or html. Use the Examples button to edit examples
+      Enter markdown or html to update package or function description. Use the Examples button to edit examples.
     </v-subheader>
-    <v-container fluid v-show="description_visible && description_toggle==0" style="margin: 0px">
+
+    <v-container fluid v-show="description_visible && package_description_toggle==0" style="margin: 0px">
+      <v-textarea
+        name="package description markdown"
+        clear-icon="mdi-close-circle"
+        label="Package Markdown"
+        outlined
+        :value="package_description_markdown"
+        v-model="package_description_markdown"
+        multiple
+        @input="update_package_desc_html"
+        no-resize="true"
+        wrap="off"
+        height="100"
+        hide-details
+      ></v-textarea>
+    </v-container>
+    <v-container fluid v-show="description_visible && package_description_toggle==1" style="margin: 0px">
+      <v-textarea
+        name="description html raw"
+        clear-icon="mdi-close-circle"
+        label="Package Raw HTML"
+        outlined
+        :value="package_description_html"
+        v-model="package_description_html"
+        @input="update_package_desc_markdown"
+        no-resize="true"
+        wrap="off"
+        height="100"
+        hide-details
+      ></v-textarea>
+      </v-container>
+    <v-container fluid v-show="description_visible && package_description_toggle==2">
+        <v-header style="font-size: 10.5px; font-family: Helvetica; color: #616161; margin: 6px;">
+          Package Processed HTML
+        </v-header>
+         <v-card class="pa-2" elevation="0" color="#F6F6F6" style="margin: 0px; border: 1px solid #C6C6C6;">
+           <div v-html="package_description_html" class="text-left"/>
+         </v-card>
+      </v-container>
+
+        <v-container fluid style="margin: 0px; padding-top: 0px">
+      <v-btn-toggle v-model="package_description_toggle" mandatory style="margin: 0px">
+        <v-tooltip bottom>
+          <template v-slot:activator="{ on, attrs }">
+            <v-btn x-small v-bind="attrs" v-on="on">
+              <v-icon small>mdi-pound</v-icon>
+            </v-btn>
+          </template>
+          <span>Markdown</span>
+      </v-tooltip>
+        <v-tooltip bottom>
+          <template v-slot:activator="{ on, attrs }">
+            <v-btn x-small v-bind="attrs" v-on="on">
+              <v-icon small>mdi-xml</v-icon>
+            </v-btn>
+          </template>
+          <span>html</span>
+      </v-tooltip>
+        <v-tooltip bottom>
+          <template v-slot:activator="{ on, attrs }">
+            <v-btn x-small v-bind="attrs" v-on="on">
+              <v-icon small>mdi-text-subject</v-icon>
+            </v-btn>
+          </template>
+          <span>Final</span>
+      </v-tooltip>
+      </v-btn-toggle>
+    </v-container>
+
+    <v-subheader style="height: fit-content; padding-bottom: 15px; font-size: 12px">
+      Function description:
+    </v-subheader>
+
+    <v-container fluid v-show="description_visible && func_description_toggle==0" style="margin: 0px">
       <v-textarea
         name="description markdown"
         clear-icon="mdi-close-circle"
-        label="Markdown"
+        label="Function Markdown"
         outlined
-        :value="description_markdown"
-        v-model="description_markdown"
+        :value="func_description_markdown"
+        v-model="func_description_markdown"
         multiple
-        @input="update_html"
+        @input="update_func_desc_html"
         no-resize="true"
         wrap="off"
         height="200"
         hide-details
       ></v-textarea>
     </v-container>
-    <v-container fluid v-show="description_visible && description_toggle==1" style="margin: 0px">
+    <v-container fluid v-show="description_visible && func_description_toggle==1" style="margin: 0px">
       <v-textarea
         name="description html raw"
         clear-icon="mdi-close-circle"
-        label="Raw HTML"
+        label="Function Raw HTML"
         outlined
-        :value="description"
-        v-model="description"
-        @input="update_markdown"
+        :value="func_description_html"
+        v-model="func_description_html"
+        @input="update_func_desc_markdown"
         no-resize="true"
         wrap="off"
         height="200"
         hide-details
       ></v-textarea>
       </v-container>
-
-      <v-container fluid v-show="description_visible && description_toggle==2">
+    <v-container fluid v-show="description_visible && func_description_toggle==2">
         <v-header style="font-size: 10.5px; font-family: Helvetica; color: #616161; margin: 6px;">
-          Processed HTML
+          Function Processed HTML
         </v-header>
          <v-card class="pa-2" elevation="0" color="#F6F6F6" style="margin: 0px; border: 1px solid #C6C6C6;">
-           <div v-html="description" class="text-left"/>
+           <div v-html="func_description_html" class="text-left"/>
          </v-card>
       </v-container>
 
     <v-container fluid style="margin: 0px; padding-top: 0px">
-      <v-btn-toggle v-model="description_toggle" mandatory style="margin: 0px">
+      <v-btn-toggle v-model="func_description_toggle" mandatory style="margin: 0px">
         <v-tooltip bottom>
           <template v-slot:activator="{ on, attrs }">
             <v-btn x-small v-bind="attrs" v-on="on">

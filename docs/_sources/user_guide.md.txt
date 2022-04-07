@@ -79,7 +79,8 @@ it is error-prone, and you should verify the validity of the extracted parameter
 parameters is set to scalar as default and should be changed manually if needed.
 
 ### Step 3 - UDF Documentation
-- You may enter a description of the formula function in the provided box. The markdown box supports markdown
+- You may enter a description of the package and the formula function in the provided boxes. 
+The markdown box supports markdown
 language for description and automatically updates the html box. You may also select the html
 tab from the bottom of the description box and directly edit the html box,
 which will in turn update the markdown box. You may also view the final processed html by clicking 
