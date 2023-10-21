@@ -17,8 +17,6 @@ custom_env = {"PATH": os.environ.get("PATH")}
 
 subprocess_kwargs = {
     'capture_output': True,
-    # 'shell': True,
-    # 'stdout':subprocess.PIPE
 }
 
 
@@ -62,45 +60,23 @@ def setup_environment():
 
 def build_backend(): 
     print("Building the backend")
-    print("here is parent dir: ", PARENT_DIR)
     build_results = subprocess.run(
-        # ['setup.py','bdist_wheel'],
-        # ['python3','setup.py','bdist_wheel'],
-        ['pwd'],
-        text=True,
-        cwd=PARENT_DIR, #only works locally
-        **subprocess_kwargs
-    )
-    print(build_results)
-
-    build_results = subprocess.run(
-        # ['setup.py','bdist_wheel'],
         ['python3','setup.py','bdist_wheel'],
-        # ['poetry', 'build'],
         cwd=PARENT_DIR, #only works locally
         **subprocess_kwargs
     )
 
-    print(build_results)
     if build_results.returncode:
         log_build_error(build_logger,build_results)
         sys.exit(build_results.returncode)
-
-    print("Checking if dist/ exists")
-    dist_path = PARENT_DIR/('dist')
-    print("Checking if this works: ")
-    if os.path.exists(dist_path):
-        print("dist/ confirmed to exist at: ", dist_path)
-    else:
-        error_message = "failed to generate: " + str(dist_path)
-        raise FileNotFoundError(error_message) 
     
     expected_whl_path = PARENT_DIR/('dist/seeq_udf_ui-'+__version__+'-py3-none-any.whl')
     if os.path.exists(expected_whl_path):
-        print(".whl file confirmed to exist at: ", expected_whl_path)
+        print(".whl generated at: ", expected_whl_path)
     else:
         error_message = "failed to generate: " + str(expected_whl_path)
         raise FileNotFoundError(error_message) 
+    
     print('Building backend complete')
 
 def generate_requirements_txt():
@@ -116,10 +92,8 @@ def generate_requirements_txt():
         print("Successfully generated backend requirements.txt")
     else:
         print("Failed to generate backend requirements.txt")
-
-#TODO: add version numbers 
+ 
 paths = [
-    # [PARENT_DIR/'requirements.txt',PARENT_DIR/'temp_folder/data-lab-functions/requirements.txt'],
     [PARENT_DIR/('dist/seeq_udf_ui-'+__version__+'-py3-none-any.whl'), PARENT_DIR/(('temp_folder/data-lab-functions/seeq_udf_ui-'+__version__+'-py3-none-any.whl'))],
     [PARENT_DIR/'seeq/addons/udf_ui/deployment_notebook/UDF_UI_deployment.ipynb',PARENT_DIR/'temp_folder/data-lab-functions/UDF_UI_deployment.ipynb'],
     [PARENT_DIR/ 'addon.json',PARENT_DIR/'temp_folder/addon.json']
@@ -156,7 +130,7 @@ def zip_items():
                 print("filename isS: ", fileName)
                 relPath = os.path.relpath(fileName, PARENT_DIR/'temp_folder').replace('\\','/')
                 print("Writing: " , relPath)
-                relPath = Path(relPath) #to fix build agent shenanigans 
+                relPath = Path(relPath) 
                 zip.write(fileName, arcname = relPath)
 
 def create_addonmetadata(): 
@@ -167,42 +141,7 @@ def create_addonmetadata():
                   arcname='addon.json')
 
 def test_packaging(): 
-    print("HI there")
-
-addon_manager_artifacts = [PARENT_DIR/("seeq-udf-ui-" + __version__ + ".addonmeta"),
-                           PARENT_DIR/("seeq-udf-ui-" + __version__ + ".addon")]
-
-def deploy_artifacts(): 
-    print(f'Distributing addon manager artifacts to seeq.jfrog.io')
-    api_key = os.getenv('JFROG_API_KEY')
-    if api_key is not None: 
-        print("We got the key!")
-    for artifact in addon_manager_artifacts:
-        _, file = os.path.split(artifact)
-        print("We're deploying this: ", file, "and this is the original file path: ", artifact)
-        # jfrog_repo_url="https://seeq.jfrog.io/artifactory/seeq-add-ons-dev-local"
-        # jfrog_file_path = f"UDFEditor/{file}"
-        # jfrog_repo_url="https://seeq.jfrog.io/artifactory/seeq-add-ons-dev-local"
-        jfrog_file_path = f"https://seeq.jfrog.io/artifactory/seeq-add-ons-dev-local/UDFEditor/{file}"
-        print("Before path")
-        path = ArtifactoryPath(jfrog_file_path, apikey=api_key)
-        print("After path: ", path)
-        try:
-            if(not os.path.exists(artifact)):
-                print("Ha yeah it doesn't exist")
-            else:
-                print("I mean we found it idk")
-            path.deploy_file(artifact)
-            print("We have deployed artifact")
-            properties = path.properties
-            # Add identifier property
-            properties["identifier"] = "com.seeq.addons.udf_ui"
-            print("Setting properties")
-            path.properties = properties
-            print("Done with properties")
-        except Exception as e:
-            print(e)
-
+    print("Testing will be added post initial PR ")
 
 if __name__ == "__main__" : 
     cleanup()
@@ -212,5 +151,4 @@ if __name__ == "__main__" :
     move_artifacts()
     zip_items()
     create_addonmetadata()
-    test_packaging() 
-    # deploy_artifacts()
+    # test_packaging() 
