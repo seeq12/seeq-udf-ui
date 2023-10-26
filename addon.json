@@ -13,6 +13,7 @@
         {
             "name": "User Defined Functions Formula Editor",
             "identifier": "com.seeq.addons.udf_ui.datalabfunctions",
+            "known_aliases": ["User Defined Formula Functions Editor", "UDF UI", "User Defined Functions","UDF Editor"],
             "description":"A Seeq add-on tool for managing user-defined formula functions.",
             "type": "AddOnTool",
             "path": "data-lab-functions",
