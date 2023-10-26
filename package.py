@@ -3,7 +3,6 @@ import os
 import shutil
 import subprocess
 import sys
-from artifactory import ArtifactoryPath
 from pathlib import Path
 from seeq.addons.udf_ui import __version__
 from zipfile import ZipFile
@@ -141,8 +140,15 @@ def create_addonmetadata():
                   arcname='addon.json')
 
 def test_packaging(): 
-    print("Testing will be added post initial PR ")
-
+    print("Testing the seeq-udf-ui package")
+    test_results = subprocess.run(
+        ['python3','test_package.py'],
+        cwd=PARENT_DIR
+    )
+    if test_results.returncode:
+        log_build_error(build_logger,test_results)
+        sys.exit(test_results.returncode)
+    
 if __name__ == "__main__" : 
     cleanup()
     setup_environment()
@@ -151,4 +157,4 @@ if __name__ == "__main__" :
     move_artifacts()
     zip_items()
     create_addonmetadata()
-    # test_packaging() 
+    test_packaging() 
