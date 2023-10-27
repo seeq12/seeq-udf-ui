@@ -1,3 +1,4 @@
+import json
 import logging 
 import os
 import shutil
@@ -13,6 +14,32 @@ build_logger.addHandler(logging.StreamHandler())
 PARENT_DIR = Path(__file__).resolve().parent
 ADDON = "seeq_udf_ui"
 custom_env = {"PATH": os.environ.get("PATH")}
+
+def configure_version(): 
+    data = None
+    with open ('addon.json', 'r') as file: 
+        data = json.load(file)
+    
+    current_version = data['version']
+    new_version = __version__
+    print("Existing addon version: ", current_version, " incoming addon version: ", new_version)
+    final_version = current_version
+    # This step will capture version changes in seeq.addons.plot_curve.__version__
+    # but the addon.json file still will need manual update as good practice for version control 
+    if current_version < new_version: 
+        data['version'] = new_version
+        final_version = new_version
+        print("Updating addon version to version: ", new_version)
+    else:
+        print("Updating addon version unnecessary")
+
+    with open('addon.json', 'w') as file: 
+        data = json.dump(data, file)
+    
+    return final_version 
+
+version = configure_version()
+
 
 subprocess_kwargs = {
     'capture_output': True,
@@ -60,7 +87,7 @@ def setup_environment():
 def build_backend(): 
     print("Building the backend")
     build_results = subprocess.run(
-        ['python3','setup.py','bdist_wheel'],
+        ['python','setup.py','bdist_wheel'],
         cwd=PARENT_DIR, #only works locally
         **subprocess_kwargs
     )
@@ -142,7 +169,7 @@ def create_addonmetadata():
 def test_packaging(): 
     print("Testing the seeq-udf-ui package")
     test_results = subprocess.run(
-        ['python3','test_package.py'],
+        ['python','test_package.py'],
         cwd=PARENT_DIR
     )
     if test_results.returncode:

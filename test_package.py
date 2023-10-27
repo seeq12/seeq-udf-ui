@@ -1,3 +1,4 @@
+import json
 import logging
 import os
 import shutil
@@ -9,6 +10,30 @@ ADDON = "seeq_udf_ui"
 build_logger = logging.getLogger('build')
 build_logger.addHandler(logging.StreamHandler())
 
+def configure_version(): 
+    data = None
+    with open ('addon.json', 'r') as file: 
+        data = json.load(file)
+    
+    current_version = data['version']
+    new_version = __version__
+    print("Existing addon version: ", current_version, " incoming addon version: ", new_version)
+    final_version = current_version
+    # This step will capture version changes in seeq.addons.plot_curve.__version__
+    # but the addon.json file still will need manual update as good practice for version control 
+    if current_version < new_version: 
+        data['version'] = new_version
+        final_version = new_version
+        print("Updating addon version to version: ", new_version)
+    else:
+        print("Updating addon version unnecessary")
+
+    with open('addon.json', 'w') as file: 
+        data = json.dump(data, file)
+    
+    return final_version 
+
+version = configure_version()
 
 PARENT_DIR = Path(__file__).resolve().parent
 TEMP_DIR = PARENT_DIR/"temp_folder"
