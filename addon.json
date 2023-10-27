@@ -1,22 +1,20 @@
 {
     "identifier": "com.seeq.addons.udf_ui",
     "name": "User Defined Functions Formula Editor",
-    "description": "A Seeq add-on tool for managing user-defined formula functions.",
+    "description": "A Seeq Add-on Tool for managing user-defined formula functions.",
     "version": "1.0.0",
     "license": "Seeq",
     "icon": "fa fa-edit",
-    "tags": {
-        "maintainer": "Seeq"
-    },
+    "maintainer": "Seeq",
     "previews": [],
     "elements": [
         {
             "name": "User Defined Functions Formula Editor",
-            "identifier": "com.seeq.addons.udf_ui.datalabfunctions",
+            "identifier": "com.seeq.addons.udf_ui.tool",
             "known_aliases": ["User Defined Formula Functions Editor", "UDF UI", "User Defined Functions","UDF Editor"],
-            "description":"A Seeq add-on tool for managing user-defined formula functions.",
+            "description":"A Seeq Add-on Tool for managing user-defined formula functions.",
             "type": "AddOnTool",
-            "path": "data-lab-functions",
+            "path": "add-on-tool",
             "notebook_file_path": "UDF_UI_deployment.ipynb",
             "configuration_schema": {
                 "type": "object",

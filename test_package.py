@@ -14,9 +14,9 @@ PARENT_DIR = Path(__file__).resolve().parent
 TEMP_DIR = PARENT_DIR/"temp_folder"
 
 
-final_artifacts = ['data-lab-functions/UDF_UI_deployment.ipynb',
-    ('data-lab-functions/seeq_udf_ui-'+__version__+'-py3-none-any.whl'),
-    'data-lab-functions/requirements.txt',
+final_artifacts = ['add-on-tool/UDF_UI_deployment.ipynb',
+    ('add-on-tool/seeq_udf_ui-'+__version__+'-py3-none-any.whl'),
+    'add-on-tool/requirements.txt',
     'addon.json']
 
 def test_temp_directory():

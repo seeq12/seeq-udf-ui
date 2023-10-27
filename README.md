@@ -70,7 +70,7 @@ $ git clone git@gitub.com:seeq12/seeq-udf-ui.git
 ```
 For development work, after checking out the code from repository, 
 it is highly recommended you create a python virtual environment, 
-`pip install -r requirement.txt`, and install the package in that
+`pip install -r requirements.txt`, and install the package in that
 working environment. 
 
 There is a template for the developer notebook in /development. 
@@ -93,6 +93,8 @@ generate the documentation in the docs folder, i.e., from the docs/src folder:
 $ make github
 
 ```
+# Generating a .addon file for use with Add-on Manager 
+To create a .addon, run `python package.py` from the top directory after pip installing all the requirements in requirements.txt (`pip install -r requirements.txt`). It will produce a .addon file in the same directory.
 
 
 # Important links

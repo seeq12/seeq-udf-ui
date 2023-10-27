@@ -80,7 +80,7 @@ def build_backend():
 
 def generate_requirements_txt():
     print("Generating backend requirements.txt file")
-    path = PARENT_DIR / "temp_folder/data-lab-functions/requirements.txt"
+    path = PARENT_DIR / "temp_folder/add-on-tool/requirements.txt"
     path.parent.mkdir(parents=True, exist_ok=True)
     requirements = 'seeq_udf_ui-'+__version__+'-py3-none-any.whl'
 
@@ -93,8 +93,8 @@ def generate_requirements_txt():
         print("Failed to generate backend requirements.txt")
  
 paths = [
-    [PARENT_DIR/('dist/seeq_udf_ui-'+__version__+'-py3-none-any.whl'), PARENT_DIR/(('temp_folder/data-lab-functions/seeq_udf_ui-'+__version__+'-py3-none-any.whl'))],
-    [PARENT_DIR/'seeq/addons/udf_ui/deployment_notebook/UDF_UI_deployment.ipynb',PARENT_DIR/'temp_folder/data-lab-functions/UDF_UI_deployment.ipynb'],
+    [PARENT_DIR/('dist/seeq_udf_ui-'+__version__+'-py3-none-any.whl'), PARENT_DIR/(('temp_folder/add-on-tool/seeq_udf_ui-'+__version__+'-py3-none-any.whl'))],
+    [PARENT_DIR/'seeq/addons/udf_ui/deployment_notebook/UDF_UI_deployment.ipynb',PARENT_DIR/'temp_folder/add-on-tool/UDF_UI_deployment.ipynb'],
     [PARENT_DIR/ 'addon.json',PARENT_DIR/'temp_folder/addon.json']
 ]
 
