@@ -30,7 +30,13 @@ file)
 
 5. Verify that the UDF UI add-on is present in the AddOn menu in workbench.
 
-### Source Installation
+# Development -- Generating a .addon file for drag and droo use with Add-on Manager 
+To create a .addon, run `python package.py` from the top directory after pip installing all the requirements in requirements.txt (`pip install -r requirements.txt`). It will produce a .addon file in the same directory.
+
+# Installation 
+From the Add-on Manager UI, locate the name of the Add-on and click "Install". As of 10/27/2023, this is only available to users with access to the seeq-add-ons-dev-local Jfrog gallery. If you do not have access, use the deprecated source installation steps below.
+
+### DEPRECATD - Source Installation
 
 For development work, after checking out the code from repository, 
 it is highly recommended you create a python virtual environment, 
@@ -53,7 +59,7 @@ and then `pip install [FILE NAME].whl`
 
 ----
 
-# Development
+# DEPRECATED - Development
 
 We welcome new contributors of all experience levels.
 
