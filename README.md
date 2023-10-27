@@ -7,7 +7,14 @@ modifying existing ones, modifying access control, or deleting existing user def
 ![drawing](https://github.com/seeq12/seeq-udf-ui/blob/main/docs/_static/overview.png?raw=true)
 
 ----
-# Installation
+
+# Development -- Generating a .addon file for drag and droo use with Add-on Manager 
+To create a .addon, run `python package.py` from the top directory after pip installing all the requirements in requirements.txt (`pip install -r requirements.txt`). It will produce a .addon file in the same directory.
+
+# Installation 
+From the Add-on Manager UI, locate the name of the Add-on and click "Install". As of 10/27/2023, this is only available to users with access to the seeq-add-ons-dev-local Jfrog gallery. If you do not have access, use the deprecated installation steps below.
+
+# DEPRECATED - Installation
 
 ### User Installation Requirements (Seeq Data Lab)
 If you want to install **seeq-udf-ui** as a Seeq Add-on Tool, you will need a version of Seeq Data Lab:
@@ -29,12 +36,6 @@ file)
    app notebook which will be available from the deployment folder in Seeq Data Lab.
 
 5. Verify that the UDF UI add-on is present in the AddOn menu in workbench.
-
-# Development -- Generating a .addon file for drag and droo use with Add-on Manager 
-To create a .addon, run `python package.py` from the top directory after pip installing all the requirements in requirements.txt (`pip install -r requirements.txt`). It will produce a .addon file in the same directory.
-
-# Installation 
-From the Add-on Manager UI, locate the name of the Add-on and click "Install". As of 10/27/2023, this is only available to users with access to the seeq-add-ons-dev-local Jfrog gallery. If you do not have access, use the deprecated source installation steps below.
 
 ### DEPRECATD - Source Installation
 
