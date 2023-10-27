@@ -87,7 +87,7 @@ def setup_environment():
 def build_backend(): 
     print("Building the backend")
     build_results = subprocess.run(
-        ['python','setup.py','bdist_wheel'],
+        ['python3','setup.py','bdist_wheel'],
         cwd=PARENT_DIR, #only works locally
         **subprocess_kwargs
     )
@@ -169,7 +169,7 @@ def create_addonmetadata():
 def test_packaging(): 
     print("Testing the seeq-udf-ui package")
     test_results = subprocess.run(
-        ['python','test_package.py'],
+        ['python3','test_package.py'],
         cwd=PARENT_DIR
     )
     if test_results.returncode:
