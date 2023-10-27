@@ -1,1 +1,77 @@
-{"identifier": "com.seeq.addons.udf_ui", "name": "User Defined Functions Formula Editor", "description": "A Seeq Add-on Tool for managing user-defined formula functions.", "version": "1.0.0", "license": "Seeq", "icon": "fa fa-edit", "maintainer": "Seeq", "previews": [], "elements": [{"name": "User Defined Functions Formula Editor", "identifier": "com.seeq.addons.udf_ui.tool", "known_aliases": ["User Defined Formula Functions Editor", "UDF UI", "User Defined Functions", "UDF Editor"], "description": "A Seeq Add-on Tool for managing user-defined formula functions.", "type": "AddOnTool", "path": "add-on-tool", "notebook_file_path": "UDF_UI_deployment.ipynb", "configuration_schema": {"type": "object", "properties": {"display": {"type": "object", "properties": {"icon": {"type": "string", "default": "fa fa-edit"}, "linkType": {"enum": ["window", "tab", "none"], "default": "window"}, "sortKey": {"type": "string", "default": "u"}, "windowDetails": {"type": "string", "default": "popup=1,toolbar=0,location=0,left=800,top=200,height=1200,width=1000"}, "reuseWindow": {"type": "boolean", "default": false}, "includeWorkbookParameters": {"type": "boolean", "default": true}}, "required": ["icon", "linkType", "sortKey", "windowDetails", "reuseWindow", "includeWorkbookParameters"]}}, "required": ["display"]}, "configuration_filename": "config", "configuration_converter": "toml"}]}
+{
+    "identifier": "com.seeq.addons.udf_ui",
+    "name": "User Defined Functions Formula Editor",
+    "description": "A Seeq Add-on Tool for managing user-defined formula functions.",
+    "version": "0.1.0",
+    "license": "Seeq",
+    "icon": "fa fa-edit",
+    "maintainer": "Seeq",
+    "previews": [],
+    "elements": [
+        {
+            "name": "User Defined Functions Formula Editor",
+            "identifier": "com.seeq.addons.udf_ui.tool",
+            "known_aliases": [
+                "User Defined Formula Functions Editor",
+                "UDF UI",
+                "User Defined Functions",
+                "UDF Editor"
+            ],
+            "description": "A Seeq Add-on Tool for managing user-defined formula functions.",
+            "type": "AddOnTool",
+            "path": "add-on-tool",
+            "notebook_file_path": "UDF_UI_deployment.ipynb",
+            "configuration_schema": {
+                "type": "object",
+                "properties": {
+                    "display": {
+                        "type": "object",
+                        "properties": {
+                            "icon": {
+                                "type": "string",
+                                "default": "fa fa-edit"
+                            },
+                            "linkType": {
+                                "enum": [
+                                    "window",
+                                    "tab",
+                                    "none"
+                                ],
+                                "default": "window"
+                            },
+                            "sortKey": {
+                                "type": "string",
+                                "default": "u"
+                            },
+                            "windowDetails": {
+                                "type": "string",
+                                "default": "popup=1,toolbar=0,location=0,left=800,top=200,height=1200,width=1000"
+                            },
+                            "reuseWindow": {
+                                "type": "boolean",
+                                "default": false
+                            },
+                            "includeWorkbookParameters": {
+                                "type": "boolean",
+                                "default": true
+                            }
+                        },
+                        "required": [
+                            "icon",
+                            "linkType",
+                            "sortKey",
+                            "windowDetails",
+                            "reuseWindow",
+                            "includeWorkbookParameters"
+                        ]
+                    }
+                },
+                "required": [
+                    "display"
+                ]
+            },
+            "configuration_filename": "config",
+            "configuration_converter": "toml"
+        }
+    ]
+}
