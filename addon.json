@@ -3,7 +3,7 @@
     "name": "User Defined Functions Formula Editor",
     "description": "A Seeq Add-on Tool for managing user-defined formula functions.",
     "version": "0.1.0",
-    "license": "Seeq",
+    "license": "Apache-2.0 license",
     "icon": "fa fa-edit",
     "maintainer": "Seeq",
     "previews": [],
