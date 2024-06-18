@@ -27,7 +27,6 @@ def push_udf(package_name, selected_function_name, params_and_types, formula, ex
 
     formulas_api = sdk.FormulasApi(spy.client)
     items_api = sdk.ItemsApi(spy.client)
-    users_api = sdk.UsersApi(spy.client)
 
     package_input = ''
     package_output = ''
