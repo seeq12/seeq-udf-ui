@@ -3,6 +3,7 @@ import seeq.sdk as sdk
 from seeq import spy
 from seeq.addons.udf_ui import backend
 import traceback
+import re
 
 
 def _define_type(var_type):
@@ -17,7 +18,7 @@ def _get_user_group(group_name):
 
 def _get_user(user_name):
     users_api = sdk.UsersApi(spy.client)
-    return users_api.get_users(username_search=user_name)
+    return users_api.get_users(username_search=re.escape(user_name))
 
 
 def push_udf(package_name, selected_function_name, params_and_types, formula, examples_and_descriptions,
@@ -26,7 +27,6 @@ def push_udf(package_name, selected_function_name, params_and_types, formula, ex
 
     formulas_api = sdk.FormulasApi(spy.client)
     items_api = sdk.ItemsApi(spy.client)
-    users_api = sdk.UsersApi(spy.client)
 
     package_input = ''
     package_output = ''

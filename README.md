@@ -8,7 +8,7 @@ modifying existing ones, modifying access control, or deleting existing user def
 
 ----
 
-# Development -- Generating a .addon file for drag and droo use with Add-on Manager 
+# Development -- Generating a .addon file for drag and drop use with Add-on Manager 
 To create a .addon, run `python package.py` from the top directory after pip installing all the requirements in requirements.txt (`pip install -r requirements.txt`). It will produce a .addon file in the same directory.
 
 # Installation 
@@ -60,7 +60,7 @@ and then `pip install [FILE NAME].whl`
 
 ----
 
-# DEPRECATED - Development
+# Development
 
 We welcome new contributors of all experience levels.
 
