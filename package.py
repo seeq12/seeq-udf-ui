@@ -17,14 +17,14 @@ custom_env = {"PATH": os.environ.get("PATH")}
 
 def configure_version(): 
     data = None
-    with open ('addon.json', 'r') as file: 
+    with open('addon.json', 'r', encoding='utf-8') as file: 
         data = json.load(file)
     
     current_version = data['version']
     new_version = __version__
     print("Existing addon version: ", current_version, " incoming addon version: ", new_version)
     final_version = current_version
-    # This step will capture version changes in seeq.addons.plot_curve.__version__
+    # This step will capture version changes in seeq.addons.udf_ui.__version__
     # but the addon.json file still will need manual update as good practice for version control 
     if current_version != new_version: 
         data['version'] = new_version
@@ -33,8 +33,9 @@ def configure_version():
     else:
         print("Updating addon version unnecessary")
 
-    with open('addon.json', 'w') as file: 
-        data = json.dump(data, file)
+
+    with open('addon.json', 'w', encoding='utf-8') as file: 
+        json.dump(data, file, indent=4)
     
     return final_version 
 
