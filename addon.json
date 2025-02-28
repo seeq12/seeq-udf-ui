@@ -66,8 +66,21 @@
                         ]
                     }
                 },
+                "advanced_project_configuration": {
+                    "type": "object",
+                    "properties": {
+                        "kernel_name": {
+                            "type": "string",
+                            "default": "python38"
+                        }
+                    },
+                    "required": [
+                        "kernel_name"
+                    ]
+                },
                 "required": [
-                    "display"
+                    "display",
+                    "advanced_project_configuration"
                 ]
             },
             "configuration_filename": "config",
