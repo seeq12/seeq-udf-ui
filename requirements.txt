@@ -2,7 +2,7 @@ seeq
 seeq-spy
 ipywidgets >= 7.6.3
 IPython >= 7.29.0
-ipyvuetify >= 1.8.0
+ipyvuetify==1.10.0
 jupyter>=1.0.0
 rx>=3.2.0
 parver>=0.3.1
