@@ -37,7 +37,7 @@ setup_args = dict(
     zip_safe=False,
     install_requires=[
         "ipywidgets>=7.6.3",
-        "ipyvuetify>=1.8.0",
+        "ipyvuetify==1.10.0",
         "rx>=3.2.0",
         "traitlets>=5.1.0",
         "IPython>=7.25.0",
