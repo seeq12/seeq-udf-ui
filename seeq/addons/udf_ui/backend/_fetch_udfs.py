@@ -5,7 +5,7 @@ from seeq import spy
 
 def fetch_udf_packages():
     formulas_api = sdk.FormulasApi(spy.client)
-    packages = [p.name for p in formulas_api.get_packages().items]
+    packages = [p.name for p in formulas_api.get_packages(limit=1000).items]
     return sorted(packages)
 
 
