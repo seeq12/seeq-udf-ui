@@ -4,7 +4,7 @@ from pathlib import Path
 from typing import Callable
 from seeq.addons.udf_ui.backend import return_func_if_callable, debounce_with_timer
 from markdown import markdown as markdown_to_html
-from unmarkd import unmark as html_to_markdown
+from html2text import html2text as html_to_markdown
 
 CURRENT_DIR = Path(__file__).parent.resolve()
 

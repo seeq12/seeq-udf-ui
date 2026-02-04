@@ -44,7 +44,7 @@ setup_args = dict(
         "typeguard>=2.13.0",
         "mixpanel>=4.9.0",
         "Markdown>=3.3.4",
-        "unmarkd==0.1.7"
+        "html2text>=2025.4.15"
     ],  
     classifiers=[
         "Programming Language :: Python :: 3.8",
