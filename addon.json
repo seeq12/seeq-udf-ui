@@ -2,7 +2,7 @@
     "identifier": "com.seeq.addons.udf_ui",
     "name": "User Defined Functions Formula Editor",
     "description": "A Seeq Add-on Tool for managing user-defined formula functions.",
-    "version": "0.4.4",
+    "version": "0.4.5",
     "license": "Apache-2.0 license",
     "icon": "fa fa-gear",
     "maintainer": "Seeq",
@@ -68,10 +68,15 @@
                     "advanced_project_configuration": {
                         "type": "object",
                         "properties": {
-                          "kernel_name": { "type": "string", "default": "python311" }
+                            "kernel_name": {
+                                "type": "string",
+                                "default": "python311"
+                            }
                         },
-                        "required": ["kernel_name"]
-                      }
+                        "required": [
+                            "kernel_name"
+                        ]
+                    }
                 },
                 "required": [
                     "display",
