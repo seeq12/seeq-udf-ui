@@ -20,7 +20,7 @@ from seeq.addons import udf_ui
 # -- Project information -----------------------------------------------------
 
 project = 'seeq-udf-ui'
-copyright = '2022, Seeq Corporation'
+copyright = '2026, Seeq Corporation'
 author = 'Ehsan Shahidi'
 html_title = 'seeq-udf-ui'
 
