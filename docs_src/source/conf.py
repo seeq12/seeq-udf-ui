@@ -22,6 +22,7 @@ from seeq.addons import udf_ui
 project = 'seeq-udf-ui'
 copyright = '2022, Seeq Corporation'
 author = 'Ehsan Shahidi'
+html_title = 'seeq-udf-ui'
 
 # The full version, including alpha/beta/rc tags
 version = udf_ui.__version__
