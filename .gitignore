@@ -21,9 +21,13 @@ sdist/
 var/
 wheels/
 share/python-wheels/
+temp_folder/
 *.egg-info/
 .installed.cfg
 *.egg
+*.addon
+*.addonmeta
+*.whl
 
 # IPython
 profile_default/
@@ -81,3 +85,6 @@ TEST*.xml
 
 # Credentials and tests config
 credentials.key
+
+# macOS
+.DS_Store

@@ -48,7 +48,7 @@ def install_app(sdl_url_, *, sort_key='u',
     add_on_details = {
         "Name": ACCESS_KEY_NAME,
         "Description": ACCESS_KEY_DESCRIPTION,
-        "Icon": "fa fa-edit",
+        "Icon": "fa fa-gear",
         "Target URL": f'{sdl_url_}/apps/{DEPLOYMENT_FOLDER}/{DEPLOYMENT_NOTEBOOK}',
         "Link Type": "window",
         "Window Details": "popup=1,toolbar=0,location=0,left=800,top=200,height=1200,width=1000",
@@ -100,25 +100,21 @@ def get_installed_extensions():
 def install_nbextensions():
     installed_extensions = get_installed_extensions()
 
+    def run_command(command: str):
+        stdout = None
+        stderr = None
+        try:
+            stdout, stderr = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE, 
+                                              stderr=subprocess.PIPE).communicate()
+        except Exception:
+            print(f'Output : {stdout}')
+            print(f'Error : {stderr}')
+
     # install any extensions which are not already installed...
     for extension, installed_name in NB_EXTENSIONS.items():
         if installed_name not in installed_extensions:
-            stdout = None
-            stderr = None
-            try:
-                stdout, stderr = subprocess.Popen(f'jupyter nbextension install --user --py {extension}',
-                                                  shell=True, stdout=subprocess.PIPE,
-                                                  stderr=subprocess.PIPE).communicate()
-            except Exception:
-                print(f'Output : {stdout}')
-                print(f'Error : {stderr}')
-            try:
-                stdout, stderr = subprocess.Popen(f'jupyter nbextension enable --user --py {extension}',
-                                                  shell=True, stdout=subprocess.PIPE,
-                                                  stderr=subprocess.PIPE).communicate()
-            except Exception:
-                print(f'Output : {stdout}')
-                print(f'Error : {stderr}')
+            run_command(f'jupyter nbextension install --user --py {extension}')
+            run_command(f'jupyter nbextension enable --user --py {extension}')
 
     # verify required extensions are installed and raise an error if anything could not be installed...
     installed_extensions = get_installed_extensions()

@@ -1,21 +1,22 @@
+
+
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en" data-content_root="./">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>User Guide &mdash; seeq-udf-ui 0.1.0 documentation</title>
-      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-    <link rel="shortcut icon" href="_static/seeq-favicon.ico"/>
-  <!--[if lt IE 9]>
-    <script src="_static/js/html5shiv.min.js"></script>
-  <![endif]-->
+  <title>User Guide &mdash; seeq-udf-ui</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+
   
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/doctools.js"></script>
+    <link rel="shortcut icon" href="_static/seeq-favicon.ico"/>
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=340bb9e5"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -28,15 +29,16 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="index.html" class="icon icon-home"> seeq-udf-ui
-            <img src="_static/Seeq_logo_darkBlue_sm.png" class="logo" alt="Logo"/>
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            seeq-udf-ui
+              <img src="_static/Seeq_logo_darkBlue_sm.png" class="logo" alt="Logo"/>
           </a>
-              <div class="version">
-                0.1.0
-              </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -77,8 +79,8 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>User Guide</li>
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">User Guide</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/user_guide.md.txt" rel="nofollow"> View page source</a>
       </li>
@@ -89,11 +91,11 @@
            <div itemprop="articleBody">
              
   <section id="user-guide">
-<h1>User Guide<a class="headerlink" href="#user-guide" title="Permalink to this headline"></a></h1>
+<h1>User Guide<a class="headerlink" href="#user-guide" title="Link to this heading"></a></h1>
 <p>A general overview of the motivation for and functionality of the Seeq UDF Editor, as implemented in
 <strong>seeq-udf-ui</strong> is provided in this section.</p>
 <section id="motivation">
-<h2>Motivation<a class="headerlink" href="#motivation" title="Permalink to this headline"></a></h2>
+<h2>Motivation<a class="headerlink" href="#motivation" title="Link to this heading"></a></h2>
 <p>The Seeq Formula Tool is part of Seeq core product that allows the user to use a rich library of
 formulas including mathematical, statistics, and special purpose thermodynamic and fluid mechanic
 relationships. The Formula Tool also allows the user to customize the formula to their application
@@ -107,7 +109,7 @@ provides a UI and creates the API calls in the backend so that creating and modi
 for the user.</p>
 </section>
 <section id="usage">
-<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline"></a></h2>
+<h2>Usage<a class="headerlink" href="#usage" title="Link to this heading"></a></h2>
 <details open="" class="details-reset border rounded-2">
   <summary class="px-3 py-2 border-bottom">
     <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-device-camera-video">
@@ -125,7 +127,7 @@ webboost_found_paused="true" webboost_processed="true">
 </video></p>
 </details>
 <section id="step-1-udf-search-or-create">
-<h3>Step 1 - UDF Search or Create<a class="headerlink" href="#step-1-udf-search-or-create" title="Permalink to this headline"></a></h3>
+<h3>Step 1 - UDF Search or Create<a class="headerlink" href="#step-1-udf-search-or-create" title="Link to this heading"></a></h3>
 <ul class="simple">
 <li><p>Under packages, you will see all packages that you have at least read access to. You may select one from the existing packages
 on the server or type a new package name</p></li>
@@ -150,7 +152,7 @@ reflected in the way the functions are displayed. For instance <code class="docu
 </table>
 </section>
 <section id="step-2-inputs-and-formula">
-<h3>Step 2 - Inputs and Formula<a class="headerlink" href="#step-2-inputs-and-formula" title="Permalink to this headline"></a></h3>
+<h3>Step 2 - Inputs and Formula<a class="headerlink" href="#step-2-inputs-and-formula" title="Link to this heading"></a></h3>
 <ul class="simple">
 <li><p>Add new parameters, delete a parameter from the list, and select the parameter type (signal, scalar, condition)</p></li>
 <li><p>You can insert the parameters created in the formula editor box using the ‘+’ button next to the parameter.</p></li>
@@ -169,7 +171,7 @@ parameters is set to scalar as default and should be changed manually if needed.
 </ul>
 </section>
 <section id="step-3-udf-documentation">
-<h3>Step 3 - UDF Documentation<a class="headerlink" href="#step-3-udf-documentation" title="Permalink to this headline"></a></h3>
+<h3>Step 3 - UDF Documentation<a class="headerlink" href="#step-3-udf-documentation" title="Link to this heading"></a></h3>
 <ul class="simple">
 <li><p>You may enter a description of the package and the formula function in the provided boxes.
 The markdown box supports markdown
@@ -193,7 +195,7 @@ on the respective tab.</p></li>
 </table>
 </section>
 <section id="step-4-access-control">
-<h3>Step 4 - Access Control<a class="headerlink" href="#step-4-access-control" title="Permalink to this headline"></a></h3>
+<h3>Step 4 - Access Control<a class="headerlink" href="#step-4-access-control" title="Link to this heading"></a></h3>
 <ul class="simple">
 <li><p>You may search for Seeq users and usergroups in the provided search box, and grant them
 read, right, or manage access. By default, the table is filled with the current user given all access,
@@ -208,7 +210,7 @@ regardless of the access management set for the package.</p></li>
 </table>
 </section>
 <section id="step-4-review-and-submit">
-<h3>Step 4 - Review and Submit<a class="headerlink" href="#step-4-review-and-submit" title="Permalink to this headline"></a></h3>
+<h3>Step 4 - Review and Submit<a class="headerlink" href="#step-4-review-and-submit" title="Link to this heading"></a></h3>
 <ul class="simple">
 <li><p>Upon clicking on Review, a confirmation box will appear where you can view the details of what you
 are about to submit (push) to Seeq</p></li>

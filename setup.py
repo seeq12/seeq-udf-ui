@@ -37,14 +37,14 @@ setup_args = dict(
     zip_safe=False,
     install_requires=[
         "ipywidgets>=7.6.3",
-        "ipyvuetify>=1.8.0",
+        "ipyvuetify==1.10.0",
         "rx>=3.2.0",
         "traitlets>=5.1.0",
         "IPython>=7.25.0",
         "typeguard>=2.13.0",
         "mixpanel>=4.9.0",
         "Markdown>=3.3.4",
-        "unmarkd==0.1.7"
+        "markdownify>=1.2.2"
     ],  
     classifiers=[
         "Programming Language :: Python :: 3.8",
