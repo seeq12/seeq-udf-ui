@@ -3,7 +3,6 @@ import seeq.sdk as sdk
 from seeq import spy
 from seeq.addons.udf_ui import backend
 import traceback
-import re
 
 
 def _define_type(var_type):
@@ -18,7 +17,7 @@ def _get_user_group(group_name):
 
 def _get_user(user_name):
     users_api = sdk.UsersApi(spy.client)
-    return users_api.get_users(username_search=re.escape(user_name))
+    return users_api.get_users(username_search=user_name)
 
 
 def push_udf(package_name, selected_function_name, params_and_types, formula, examples_and_descriptions,
@@ -100,21 +99,31 @@ def push_udf(package_name, selected_function_name, params_and_types, formula, ex
         message_content = message_content + '\n' + f'An unresolved error occurred:\n {traceback.format_exc()}'
 
     for user_or_group in users_and_groups_list:
-        user_or_group_id = None
-        if user_or_group['type'] == 'UserGroup':
+        user_or_group_id = user_or_group.get('id')
+        if not user_or_group_id and user_or_group['type'] == 'UserGroup':
             try:
-                group = _get_user_group(user_or_group['name'])
-                user_or_group_id = group.items[0].id
+                groups = _get_user_group(user_or_group['name']).items
+                matched_group = next((g for g in groups if g.name == user_or_group['name']), None)
+                if matched_group:
+                    user_or_group_id = matched_group.id
+                else:
+                    message_content = message_content + '\n' + \
+                        f"Could not find the user group '{user_or_group['name']}' to set its permissions."
             except ApiException as e:
                 message_content = message_content + '\n' + f'An error was encountered when obtaining the user group info. ' \
                                            f'The Seeq API returned:\n{e.body}'
             except Exception:
                 message_content = message_content + '\n' + f'An unresolved error occurred:\n {traceback.format_exc()}'
 
-        else:
+        elif not user_or_group_id:
             try:
-                user = _get_user(user_or_group['username'])
-                user_or_group_id = user.users[0].id
+                users = _get_user(user_or_group['username']).users
+                matched_user = next((u for u in users if u.username == user_or_group['username']), None)
+                if matched_user:
+                    user_or_group_id = matched_user.id
+                else:
+                    message_content = message_content + '\n' + \
+                        f"Could not find the user '{user_or_group['name']}' to set its permissions."
             except ApiException as e:
                 message_content = message_content + '\n' + f'An error was encountered when obtaining the user info. ' \
                                            f'The Seeq API returned:\n{e.body}'

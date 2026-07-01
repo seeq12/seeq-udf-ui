@@ -44,8 +44,8 @@ def fetch_udf_docs(package_name, func_name):
 
 def fetch_users_auto(query):
     users_api = sdk.UsersApi(spy.client)
-    users_or_groups = [{'name': u.name, 'type': u.type, 'username': u.username, 'read': True, 'write': False,
-                        'manage': False} for u in users_api.autocomplete_users_and_groups(query=query).items]
+    users_or_groups = [{'name': u.name, 'type': u.type, 'username': u.username, 'id': u.id, 'read': True,
+                        'write': False, 'manage': False} for u in users_api.autocomplete_users_and_groups(query=query).items]
 
     return users_or_groups
 
@@ -57,7 +57,7 @@ def fetch_access_details(package_id):
 
     for user in items_access_details.entries:
         users.append({'name': user.identity.name, 'username': user.identity.username, 'type': user.identity.type,
-                      'read': user.permissions.read, 'write': user.permissions.write,
+                      'id': user.identity.id, 'read': user.permissions.read, 'write': user.permissions.write,
                       'manage': user.permissions.manage})
 
     return users
@@ -68,6 +68,7 @@ def give_current_user_access():
     return ({'name': current_user.name,
              'username': current_user.username,
              'type': 'User',
+             'id': current_user.id,
              'read': True,
              'write': True,
              'manage': True})

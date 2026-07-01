@@ -65,7 +65,8 @@ class AccessManagement(v.VuetifyTemplate):
         for user in user_object_list:
             if 'username' not in user:
                 user['username'] = ''
-            temp.append({'name': user['name'], 'username': user['username'], 'type': user['type'], 'read': user['read'],
+            temp.append({'name': user['name'], 'username': user['username'], 'type': user['type'],
+                         'id': user.get('id'), 'read': user['read'],
                          'write': user['write'], 'manage': user['manage']})
         self.selected_users_dict = []
         self.selected_users_dict = temp
