@@ -39,14 +39,9 @@ def _acl_entries(items_api):
 
 
 class TestPushUdfIdentityResolution:
-    def test_uses_id_directly_without_searching(self, push_env):
+    def test_user_with_id_uses_it_directly(self, push_env):
         # The reported bug: editing an existing package whose ACL carries a
-        # dotted/email username must resolve via the id and never search.
-        push_env.monkeypatch.setattr(_push_udfs, '_get_user',
-                                     MagicMock(side_effect=AssertionError('must not search when id is present')))
-        push_env.monkeypatch.setattr(_push_udfs, '_get_user_group',
-                                     MagicMock(side_effect=AssertionError('must not search when id is present')))
-
+        # dotted/email username resolves via the id, with no username lookup.
         result = _push([{'name': 'John Doe', 'username': 'john.doe@example.com', 'type': 'User',
                          'id': 'USER_GUID', 'read': True, 'write': False, 'manage': True}])
 
@@ -54,38 +49,19 @@ class TestPushUdfIdentityResolution:
         assert _acl_entries(push_env.items_api) == [
             {'identityId': 'USER_GUID', 'permissions': {'read': True, 'write': False, 'manage': True}}]
 
-    def test_fallback_searches_raw_username_and_matches_exactly(self, push_env):
-        found = SimpleNamespace(users=[SimpleNamespace(username='john.doe', id='DECOY'),
-                                       SimpleNamespace(username='john.doe@example.com', id='FOUND_ID')])
-        get_user = MagicMock(return_value=found)
-        push_env.monkeypatch.setattr(_push_udfs, '_get_user', get_user)
-
-        result = _push([{'name': 'John Doe', 'username': 'john.doe@example.com', 'type': 'User',
-                         'read': True, 'write': True, 'manage': False}])
+    def test_group_with_id_uses_it_directly(self, push_env):
+        result = _push([{'name': 'Everyone', 'username': None, 'type': 'UserGroup',
+                         'id': 'EVERYONE_ID', 'read': True, 'write': False, 'manage': False}])
 
         assert result['message_type'] == backend.MessageType.SUCCESS, result['message_content']
-        get_user.assert_called_once_with('john.doe@example.com')  # raw username, not re.escape-d
-        assert _acl_entries(push_env.items_api)[0]['identityId'] == 'FOUND_ID'
+        assert _acl_entries(push_env.items_api) == [
+            {'identityId': 'EVERYONE_ID', 'permissions': {'read': True, 'write': False, 'manage': False}}]
 
-    def test_missing_user_reports_clean_message_without_traceback(self, push_env):
-        push_env.monkeypatch.setattr(_push_udfs, '_get_user',
-                                     MagicMock(return_value=SimpleNamespace(users=[])))
-
-        result = _push([{'name': 'Ghost User', 'username': 'ghost.user@example.com', 'type': 'User',
-                         'read': True, 'write': False, 'manage': False}])
-
-        assert result['message_type'] == backend.MessageType.ERROR
-        assert "Could not find the user 'Ghost User'" in result['message_content']
-        assert 'Traceback' not in result['message_content']
-        assert _acl_entries(push_env.items_api) == []
-
-    def test_group_fallback_matches_by_exact_name(self, push_env):
-        groups = SimpleNamespace(items=[SimpleNamespace(name='EveryoneElse', id='WRONG'),
-                                        SimpleNamespace(name='Everyone', id='EVERYONE_ID')])
-        push_env.monkeypatch.setattr(_push_udfs, '_get_user_group', MagicMock(return_value=groups))
-
+    def test_entry_without_id_is_skipped_with_clear_message(self, push_env):
         result = _push([{'name': 'Everyone', 'username': None, 'type': 'UserGroup',
                          'read': True, 'write': False, 'manage': False}])
 
-        assert result['message_type'] == backend.MessageType.SUCCESS, result['message_content']
-        assert _acl_entries(push_env.items_api)[0]['identityId'] == 'EVERYONE_ID'
+        assert result['message_type'] == backend.MessageType.ERROR
+        assert "Could not set permissions for 'Everyone' because it has no identity id" in result['message_content']
+        assert 'Traceback' not in result['message_content']
+        assert _acl_entries(push_env.items_api) == []
