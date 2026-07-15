@@ -111,15 +111,21 @@ class TestModify:
         ui.app.function_parameters_display.formula = '$a + $b'
         ui.app.function_documentation.func_description = '<p>Test function</p>'
 
+        everyone = next((group for group in ui.backend.fetch_users_autocomplete(query='Everyone')
+                         if group['name'] == 'Everyone' and group['type'] == 'UserGroup'), None)
+        assert everyone is not None, 'Could not resolve the Everyone user group'
+
         access_input = [{'name': spy.user.name,
                          'username': spy.user.username,
                          'type': 'User',
+                         'id': spy.user.id,
                          'read': True,
                          'write': True,
                          'manage': True},
                         {'name': 'Everyone',
-                         'username': None,
+                         'username': everyone['username'],
                          'type': 'UserGroup',
+                         'id': everyone['id'],
                          'read': True,
                          'write': True,
                          'manage': True}
@@ -131,8 +137,11 @@ class TestModify:
 
         ui.app.search_display.vue_update_package_object(data='testPackageAccessControl')
 
-        assert access_input[0] in ui.backend.selected_package.permissions
-        assert access_input[1] in ui.backend.selected_package.permissions
+        permissions_by_id = {entry['id']: entry for entry in ui.backend.selected_package.permissions}
+        for expected in access_input:
+            actual = permissions_by_id.get(expected['id'])
+            assert actual is not None, f"{expected['name']} is missing from the package permissions"
+            assert (actual['read'], actual['write'], actual['manage']) == (True, True, True)
 
 
 @pytest.mark.system
