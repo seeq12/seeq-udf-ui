@@ -141,7 +141,8 @@ class TestModify:
         for expected in access_input:
             actual = permissions_by_id.get(expected['id'])
             assert actual is not None, f"{expected['name']} is missing from the package permissions"
-            assert (actual['read'], actual['write'], actual['manage']) == (True, True, True)
+            assert (actual['read'], actual['write'], actual['manage']) == \
+                   (expected['read'], expected['write'], expected['manage'])
 
 
 @pytest.mark.system
