@@ -3,22 +3,11 @@ import seeq.sdk as sdk
 from seeq import spy
 from seeq.addons.udf_ui import backend
 import traceback
-import re
 
 
 def _define_type(var_type):
     var_map = {'Signal': '1.toSignal()', 'Condition': 'days()', 'Scalar': '1', 'Scalar (Time)': '1d'}
     return var_map[var_type]
-
-
-def _get_user_group(group_name):
-    user_groups_api = sdk.UserGroupsApi(spy.client)
-    return user_groups_api.get_user_groups(name_search=group_name)
-
-
-def _get_user(user_name):
-    users_api = sdk.UsersApi(spy.client)
-    return users_api.get_users(username_search=re.escape(user_name))
 
 
 def push_udf(package_name, selected_function_name, params_and_types, formula, examples_and_descriptions,
@@ -100,33 +89,15 @@ def push_udf(package_name, selected_function_name, params_and_types, formula, ex
         message_content = message_content + '\n' + f'An unresolved error occurred:\n {traceback.format_exc()}'
 
     for user_or_group in users_and_groups_list:
-        user_or_group_id = None
-        if user_or_group['type'] == 'UserGroup':
-            try:
-                group = _get_user_group(user_or_group['name'])
-                user_or_group_id = group.items[0].id
-            except ApiException as e:
-                message_content = message_content + '\n' + f'An error was encountered when obtaining the user group info. ' \
-                                           f'The Seeq API returned:\n{e.body}'
-            except Exception:
-                message_content = message_content + '\n' + f'An unresolved error occurred:\n {traceback.format_exc()}'
-
-        else:
-            try:
-                user = _get_user(user_or_group['username'])
-                user_or_group_id = user.users[0].id
-            except ApiException as e:
-                message_content = message_content + '\n' + f'An error was encountered when obtaining the user info. ' \
-                                           f'The Seeq API returned:\n{e.body}'
-            except Exception:
-                message_content = message_content + '\n' + f'An unresolved error occurred:\n {traceback.format_exc()}'
-
+        user_or_group_id = user_or_group.get('id')
         if user_or_group_id:
             access_control_input = {'identityId': user_or_group_id, 'permissions': {'read': user_or_group['read'],
                                                                                     'write': user_or_group['write'],
                                                                                     'manage': user_or_group['manage']}}
-
             ace_list.append(access_control_input)
+        else:
+            message_content = message_content + '\n' + \
+                f"Could not set permissions for '{user_or_group['name']}' because it has no identity id."
     ace_input = {'preview': False, 'entries': ace_list, 'localizeInherited': False,
                  'disablePermissionInheritance': False}
     try:
