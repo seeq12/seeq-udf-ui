@@ -1,5 +1,17 @@
 # Changelog
 
+v0.4.7
+---
+- Common Vulnerabilities and Exposures (CVE) fixes
+
+v0.4.6
+---
+- Common Vulnerabilities and Exposures (CVE) fixes
+
+v0.4.5
+---
+- Common Vulnerabilities and Exposures (CVE) fixes
+
 v0.2.0
 ---
 - Fixed issue [#13](https://github.com/seeq12/seeq-udf-ui/issues/13) with escaping characters in username search
