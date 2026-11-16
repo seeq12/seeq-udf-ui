@@ -43,8 +43,9 @@ setup_args = dict(
         "IPython>=7.25.0",
         "typeguard>=2.13.0",
         "mixpanel>=4.9.0",
-        "Markdown>=3.3.4",
-        "markdownify>=1.2.2"
+        "Markdown>=3.11.3",
+        "markdownify>=1.2.2",
+        "soupsieve>=4.1.1"
     ],  
     classifiers=[
         "Programming Language :: Python :: 3.8",
