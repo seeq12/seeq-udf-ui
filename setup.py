@@ -43,15 +43,16 @@ setup_args = dict(
         "IPython>=7.25.0",
         "typeguard>=2.13.0",
         "mixpanel>=4.9.0",
-        "Markdown>=3.3.4",
-        "markdownify>=1.2.2"
+        "Markdown>=3.11.3",
+        "markdownify>=1.2.2",
+        "soupsieve>=4.1.1"
     ],  
     classifiers=[
-        "Programming Language :: Python :: 3.8",
+        "Programming Language :: Python :: 3.11",
         "License :: OSI Approved :: Apache Software License",
         "Operating System :: OS Independent",
     ],
-    python_requires='>=3.7',
+    python_requires='>=3.11.5',
     license='Apache License 2.0'
 )
 

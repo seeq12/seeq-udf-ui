@@ -1,5 +1,9 @@
 # Changelog
 
+v0.4.8
+---
+- Common Vulnerabilities and Exposures (CVE) fixes
+
 v0.4.7
 ---
 - Common Vulnerabilities and Exposures (CVE) fixes
